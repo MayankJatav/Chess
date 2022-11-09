@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/js.js"></script>
     <title>Document</title>
     <style>
         body {
@@ -104,46 +105,6 @@
             <div class="col"></div>
         </div>
     </div>
-    <script>
-        function getBoard() {
-            let cells = document.getElementsByClassName("col");
-            let arr = new Array();
-            pos = 0;
-            for (let i = 0; i < 8; i++) {
-                let arr1 = new Array();
-                for (let j = 0; j < 8; j++) {
-                    arr1.push(cells[pos]);
-                    pos++;
-                }
-                arr.push(arr1);
-            }
-            return arr;
-        }
-        board = getBoard();
-        function colorCells() {
-            pos = 0;
-            for (let i = 0; i < 8; i++) {
-                for (let j = 0; j < 8; j++) {
-                    if ((i + j) % 2 == 0) {
-                        board[i][j].style.background = "grey";
-                    }
-                    else {
-                        board[i][j].style.background = "white";
-                    }
-                    pos++;
-                }
-            }
-        }
-        document.getElementById("board").onclick = e => {
-            colorCells();
-            if(e.target.className=='col') {
-                e.target.style.background = "rgb(0, 0, 0, 0.8)";
-            }
-            console.log(e.target);  // to get the element
-            console.log(e.target.tagName);  // to get the element tag name alone
-        }
-        colorCells();
-    </script>
 </body>
 
 </html>

@@ -1,12 +1,15 @@
+import { init } from "./game.js";
+let board, inititilize;
+inititilize = new init();
 window.onload = function () {
     board = getBoard();
     setCellClickAction();
-    colorCells();
+    initBoard();
 }
 function getBoard() {
     let cells = document.getElementsByClassName("col");
     let arr = new Array();
-    pos = 0;
+    let pos = 0;
     for (let i = 0; i < 8; i++) {
         let arr1 = new Array();
         for (let j = 0; j < 8; j++) {
@@ -18,7 +21,7 @@ function getBoard() {
     return arr;
 }
 function colorCells() {
-    pos = 0;
+    let pos = 0;
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
             if ((i + j) % 2 == 0) {
@@ -28,6 +31,23 @@ function colorCells() {
                 board[i][j].style.background = "white";
             }
             pos++;
+        }
+    }
+}
+function initBoard() {
+    colorCells();
+    let pos = 0;
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            let image = document.createElement("img");
+            let a = inititilize.chessBoard[i][j];
+            if (a != "") {
+                image.src = "pieces/" + a + ".svg";
+                console.log(i+" "+j);
+                // document.querySelector("#board > div:nth-child("+i+") > div:nth-child("+j+")").appendChild(image);
+                board[i][j].appendChild(image);
+                pos++;
+            }
         }
     }
 }

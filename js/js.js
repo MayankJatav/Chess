@@ -1,6 +1,7 @@
-import { init } from "./game.js";
+import { init, moves } from "./game.js";
 let board, inititilize;
 inititilize = new init();
+let movesObj = new moves();
 window.onload = function () {
     board = getBoard();
     setCellClickAction();
@@ -13,6 +14,8 @@ function getBoard() {
     for (let i = 0; i < 8; i++) {
         let arr1 = new Array();
         for (let j = 0; j < 8; j++) {
+            cells[pos].row = i;
+            cells[pos].col = j;
             arr1.push(cells[pos]);
             pos++;
         }
@@ -24,11 +27,19 @@ function colorCells() {
     let pos = 0;
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
+            let a = inititilize.chessBoard[i][j];
             if ((i + j) % 2 == 0) {
                 board[i][j].style.background = "grey";
             }
             else {
                 board[i][j].style.background = "white";
+            }
+            if (a != "") {
+                let imagesrc = "pieces/" + a + ".svg";
+                board[i][j].style.backgroundImage = "url(" + imagesrc + ")";
+                board[i][j].style.backgroundRepeat = "no-repeat";
+                board[i][j].style.backgroundSize = "100%";
+                pos++;
             }
             pos++;
         }
@@ -36,39 +47,53 @@ function colorCells() {
 }
 function initBoard() {
     colorCells();
-    let pos = 0;
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-            let image = document.createElement("img");
-            let a = inititilize.chessBoard[i][j];
-            if (a != "") {
-                image.src = "pieces/" + a + ".svg";
-                console.log(i+" "+j);
-                // document.querySelector("#board > div:nth-child("+i+") > div:nth-child("+j+")").appendChild(image);
-                board[i][j].appendChild(image);
-                pos++;
-            }
-        }
-    }
 }
 function setCellClickAction() {
     document.getElementById("board").onclick = e => {
         colorCells();
+
         if (e.target.className == 'col') {
-            e.target.style.background = "rgb(0, 0, 0, 0.8)";
+            e.target.style.backgroundColor = "rgb(0, 0, 0, 0.8)";
+            glowPossibleMovesCells([e.target.row, e.target.col]);
         }
-        console.log(e.target);  // to get the element
+        console.log(e.target.row + " " + e.target.col);  // to get the element
         console.log(e.target.tagName);  // to get the element tag name alone
     }
 }
 function glowCells(movesArray, currentPos) {
-    colorCells();
     for (let i = 0; i < movesArray.length; i++) {
-        // for (let j = 0; j < 2; j++) {
-        a = currentPos[0] + movesArray[i][0];
-        b = currentPos[1] + movesArray[i][1];
-        // console.log(movesArray[i][0] +" "+ movesArray[i][1] +" "+i +" "+a+" "+b+ " "+currentPos[0]+" "+currentPos[1]);
-        board[a][b].style.background = "blue";
+        let a = currentPos[0] + movesArray[i][0];
+        let b = currentPos[1] + movesArray[i][1];
+        if (!(a > 7) && !(a < 0) && !(b > 7) && !(b < 0)) {
+            board[a][b].style.backgroundColor = "blue";
+        }
         // }
+    }
+}
+function glowPossibleMovesCells(currentPos) {
+    let row = currentPos[0];
+    let col = currentPos[1];
+    let currentPosPiece = inititilize.chessBoard[row][col];
+    let l = currentPosPiece.length;
+    let currentPiece = currentPosPiece.substring(0, l - 1);
+    switch (currentPiece) {
+        case "king":
+            glowCells(movesObj.king, [row, col]);
+            break;
+        case "queen":
+            glowCells(movesObj.queen, [row, col]);
+            break;
+        case "bishop":
+            glowCells(movesObj.bishop, [row, col]);
+            break;
+        case "knight":
+            glowCells(movesObj.knight, [row, col]);
+            break;
+        case "rook":
+            glowCells(movesObj.rook, [row, col]);
+            break;
+        case "pawn":
+            glowCells(movesObj.pawn, [row, col]);
+            break;
     }
 }

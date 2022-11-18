@@ -89,7 +89,10 @@ function glowPossibleMovesCells(currentPos) {
             glowCells(movesObj.rook, [row, col]);
             break;
         case "pawn":
-            glowCells(movesObj.pawn, [row, col]);
+            if (currentPosPiece.charAt(l - 1) == "b")
+                glowCells(movesObj.pawn, [row, col]);
+            else
+                glowCells(movesObj.pawn1, [row, col]);
             break;
     }
 }

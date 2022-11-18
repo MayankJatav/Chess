@@ -51,13 +51,10 @@ function initBoard() {
 function setCellClickAction() {
     document.getElementById("board").onclick = e => {
         colorCells();
-
         if (e.target.className == 'col') {
             e.target.style.backgroundColor = "rgb(0, 0, 0, 0.8)";
             glowPossibleMovesCells([e.target.row, e.target.col]);
         }
-        console.log(e.target.row + " " + e.target.col);  // to get the element
-        console.log(e.target.tagName);  // to get the element tag name alone
     }
 }
 function glowCells(movesArray, currentPos) {
@@ -67,7 +64,6 @@ function glowCells(movesArray, currentPos) {
         if (!(a > 7) && !(a < 0) && !(b > 7) && !(b < 0)) {
             board[a][b].style.backgroundColor = "blue";
         }
-        // }
     }
 }
 function glowPossibleMovesCells(currentPos) {

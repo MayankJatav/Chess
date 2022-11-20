@@ -1,7 +1,6 @@
-import { init, moves } from "./game.js";
-let board, inititilize;
-inititilize = new init();
-let movesObj = new moves();
+import { game } from "./game.js";
+let board;
+let gameCurrent = new game();
 window.onload = function () {
     board = getBoard();
     setCellClickAction();
@@ -27,7 +26,7 @@ function colorCells() {
     let pos = 0;
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
-            let a = inititilize.chessBoard[i][j];
+            let a = gameCurrent.chessBoard[i][j];
             if ((i + j) % 2 == 0) {
                 board[i][j].style.background = "grey";
             }
@@ -58,7 +57,7 @@ function setCellClickAction() {
     }
 }
 function glowCells(currentPos) {
-    let movesArray = movesObj.getPossibleMoves(currentPos);
+    let movesArray = gameCurrent.getPossibleMoves(currentPos);
     for (let i = 0; i < movesArray.length; i++) {
             board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "blue";
     }

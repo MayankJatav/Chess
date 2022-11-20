@@ -53,12 +53,12 @@ function setCellClickAction() {
         colorCells();
         if (e.target.className == 'col') {
             e.target.style.backgroundColor = "rgb(0, 0, 0, 0.8)";
-            glowPossibleMovesCells([e.target.row, e.target.col]);
+            glowCells([e.target.row, e.target.col]);
         }
     }
 }
-function glowCells(movesArray, currentPos) {
-    movesArray = movesObj.getPossibleMovesCells(currentPos);
+function glowCells(currentPos) {
+    let movesArray = movesObj.getPossibleMoves(currentPos);
     for (let i = 0; i < movesArray.length; i++) {
             board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "blue";
     }

@@ -84,7 +84,7 @@ export class moves {
         }
         return moves;
     }
-    getPossibleMovesCells(currentPos) {
+    getPossibleMoves(currentPos) {
         let row = currentPos[0];
         let col = currentPos[1];
         let currentPosPiece = this.chessBoard[row][col];

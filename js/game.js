@@ -104,6 +104,7 @@ export class moves {
             case "pawn":
                 return this.getPawnMoves([row, col]);
         }
+        return [];
     }
 }
 export class init {

@@ -51,8 +51,8 @@ function setCellClickAction() {
     document.getElementById("board").onclick = e => {
         colorCells();
         if (e.target.className == 'col') {
-            e.target.style.backgroundColor = "rgb(0, 0, 0, 0.8)";
             glowCells([e.target.row, e.target.col]);
+            e.target.style.backgroundColor = "rgb(0, 0, 0, 0.8)";
         }
     }
 }

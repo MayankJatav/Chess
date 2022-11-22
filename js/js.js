@@ -61,8 +61,4 @@ function glowCells(currentPos) {
     for (let i = 0; i < movesArray.length; i++) {
             board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "blue";
     }
-    movesArray = gameCurrent.getAttackedPositions(movesArray);
-    for (let i = 0; i < movesArray.length; i++) {
-            board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "red";
-    }
 }

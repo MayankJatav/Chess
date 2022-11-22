@@ -32,15 +32,6 @@ export class game {
         }
         return moves;
     }
-    getAttackedPositions(moves) {
-        let attackedPos = [];
-        for (let i = 0; i < moves.length; i++) {
-            let piece = this.chessBoard[moves[i][0]][moves[i][1]];
-            if (piece != "")
-                attackedPos.push(moves[i]);
-        }
-        return attackedPos;
-    }
     getKingMoves(currentPosition) {
         let currentPosPiece = this.chessBoard[currentPosition[0]][currentPosition[1]];
         if (currentPosPiece != "kingw" && currentPosPiece != "kingb") { return []; }

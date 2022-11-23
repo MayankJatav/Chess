@@ -86,18 +86,47 @@ export class game {
         if (currentPosPiece != "pawnw" && currentPosPiece != "pawnb") { return []; }
         let pawnMoves = [[[1, 0]]];
         let pawnMoves1 = [[[-1, 0]]];
-        let moves, pMoves;
+        let moves, pMoves, row = currentPosition[0], col = currentPosition[1];
         if (currentPosPiece.charAt(currentPosPiece.length - 1) == "b") {
-            pMoves = pawnMoves;
+            if (row < 7) {
+                if (this.chessBoard[row + 1][col] == "") {
+                    pMoves = pawnMoves;
+                    if (row == 1 && this.chessBoard[3][col] == "") {
+                        pMoves[0].push([2, 0]);
+                    }
+                }
+                else
+                    pMoves = [[]];
+                if (col < 7 && this.chessBoard[row + 1][col + 1] != "") {
+                    pMoves.push([[1, 1]]);
+                }
+                if (col > 0 && this.chessBoard[row + 1][col - 1] != "") {
+                    pMoves.push([[1, -1]]);
+                }
+            }
+            else {
+                //promotion
+            }
         }
         else {
-            pMoves = pawnMoves1;
-        }
-        if (currentPosition[0] == 1) {
-            pMoves[0].push([2, 0]);
-        }
-        if (currentPosition[0] == 6) {
-            pMoves[0].push([-2, 0]);
+            if(row>0) {
+                if (this.chessBoard[row - 1][col] == "") {
+                    pMoves = pawnMoves1;
+                    if (row == 6 && this.chessBoard[4][col] == "") {
+                        pMoves[0].push([-2, 0]);
+                    }
+                }
+                else
+                    pMoves = [[]];
+                    if (col < 7 && this.chessBoard[row - 1][col + 1] != "") {
+                        pMoves.push([[-1, 1]]);
+                    }
+                    if (col > 0 && this.chessBoard[row - 1][col - 1] != "") {
+                        pMoves.push([[-1, -1]]);
+                    }
+            } else {
+                //promotion
+            }
         }
         moves = this.getPossibleMoves(pMoves, currentPosition);
         return moves;

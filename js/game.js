@@ -86,13 +86,20 @@ export class game {
         if (currentPosPiece != "pawnw" && currentPosPiece != "pawnb") { return []; }
         let pawnMoves = [[[1, 0]]];
         let pawnMoves1 = [[[-1, 0]]];
-        let moves;
+        let moves, pMoves;
         if (currentPosPiece.charAt(currentPosPiece.length - 1) == "b") {
-            moves = this.getInBoundaryMoves(pawnMoves, currentPosition);
+            pMoves = pawnMoves;
         }
         else {
-            moves = this.getInBoundaryMoves(pawnMoves1, currentPosition);
+            pMoves = pawnMoves1;
         }
+        if (currentPosition[0] == 1) {
+            pMoves[0].push([2, 0]);
+        }
+        if (currentPosition[0] == 6) {
+            pMoves[0].push([-2, 0]);
+        }
+        moves = this.getInBoundaryMoves(pMoves, currentPosition);
         return moves;
     }
     getPossibleMoves(currentPos) {

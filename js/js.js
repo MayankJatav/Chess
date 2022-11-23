@@ -54,11 +54,9 @@ function setCellClickAction() {
         colorCells();
         if (e.target.className == 'col') {
             let current = [e.target.row, e.target.col];
-            console.log(source + " " + current);
             if (bgColor == "blue") {
                 gameCurrent.movePiece(source, current);
                 colorCells();
-                console.log("Here");
             }
             else {
                 source = [e.target.row, e.target.col];

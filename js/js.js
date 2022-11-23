@@ -47,18 +47,30 @@ function colorCells() {
 function initBoard() {
     colorCells();
 }
+let source;
 function setCellClickAction() {
     document.getElementById("board").onclick = e => {
+        let bgColor = e.target.style.backgroundColor;
         colorCells();
         if (e.target.className == 'col') {
-            glowCells([e.target.row, e.target.col]);
-            e.target.style.backgroundColor = "rgb(0, 0, 0, 0.8)";
+            let current = [e.target.row, e.target.col];
+            console.log(source + " " + current);
+            if (bgColor == "blue") {
+                gameCurrent.movePiece(source, current);
+                colorCells();
+                console.log("Here");
+            }
+            else {
+                source = [e.target.row, e.target.col];
+                glowCells(source);
+                e.target.style.backgroundColor = "rgb(0, 0, 0, 0.8)";
+            }
         }
     }
 }
 function glowCells(currentPos) {
     let movesArray = gameCurrent.getPossibleMoves(currentPos);
     for (let i = 0; i < movesArray.length; i++) {
-            board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "blue";
+        board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "blue";
     }
 }

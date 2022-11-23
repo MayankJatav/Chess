@@ -117,4 +117,19 @@ export class game {
         }
         return [];
     }
+
+    movePiece(currentPosition, destination) {
+        let possibleMoves = this.getPossibleMoves(currentPosition);
+        let flag = false;
+        let arr;
+        for (let i = 0; i < possibleMoves.length; i++) {
+            arr = possibleMoves[i];
+            if (arr[0] == destination[0] && arr[1] == destination[1]) { flag = true; break; }
+        }
+        if (flag) {
+            this.chessBoard[destination[0]][destination[1]] = this.chessBoard[currentPosition[0]][currentPosition[1]];
+            this.chessBoard[currentPosition[0]][currentPosition[1]] = "";
+        }
+    }
+
 }

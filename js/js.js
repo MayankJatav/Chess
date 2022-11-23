@@ -67,7 +67,7 @@ function setCellClickAction() {
     }
 }
 function glowCells(currentPos) {
-    let movesArray = gameCurrent.getPossibleMoves(currentPos);
+    let movesArray = gameCurrent.getMoves(currentPos);
     for (let i = 0; i < movesArray.length; i++) {
         board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "blue";
     }

@@ -9,7 +9,7 @@ export class game {
         ["pawnw", "pawnw", "pawnw", "pawnw", "pawnw", "pawnw", "pawnw", "pawnw"],
         ["rookw", "knightw", "bishopw", "queenw", "kingw", "bishopw", "knightw", "rookw"]];
     }
-    getInBoundaryMoves(pieceMoves, currentPosition) {
+    getPossibleMoves(pieceMoves, currentPosition) {
         let moves = [];
         for (let j = 0; j < pieceMoves.length; j++) {
             for (let i = 0; i < pieceMoves[j].length; i++) {
@@ -36,7 +36,7 @@ export class game {
         let currentPosPiece = this.chessBoard[currentPosition[0]][currentPosition[1]];
         if (currentPosPiece != "kingw" && currentPosPiece != "kingb") { return []; }
         let KingMoves = [[[1, 1]], [[1, 0]], [[1, -1]], [[0, 1]], [[0, -1]], [[-1, 1]], [[-1, 0]], [[-1, -1]]];
-        let moves = this.getInBoundaryMoves(KingMoves, currentPosition);
+        let moves = this.getPossibleMoves(KingMoves, currentPosition);
         return moves;
     }
     getBishopMoves(currentPosition) {
@@ -47,14 +47,14 @@ export class game {
         [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7]],
         [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7]]];
         let moves = [];
-        moves = (this.getInBoundaryMoves(bishopMoves, currentPosition));
+        moves = (this.getPossibleMoves(bishopMoves, currentPosition));
         return moves;
     }
     getKnightMoves(currentPosition) {
         let currentPosPiece = this.chessBoard[currentPosition[0]][currentPosition[1]];
         if (currentPosPiece != "knightw" && currentPosPiece != "knightb") { return []; }
         let knightMoves = [[[2, 1]], [[1, 2]], [[1, -2]], [[2, -1]], [[-2, 1]], [[-1, 2]], [[-1, -2]], [[-2, -1]]];
-        let moves = this.getInBoundaryMoves(knightMoves, currentPosition);
+        let moves = this.getPossibleMoves(knightMoves, currentPosition);
         return moves;
     }
     getRookMoves(currentPosition) {
@@ -64,7 +64,7 @@ export class game {
         [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7]],
         [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]],
         [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0]]];
-        let moves = this.getInBoundaryMoves(rookMoves, currentPosition);
+        let moves = this.getPossibleMoves(rookMoves, currentPosition);
         return moves;
     }
     getQueenMoves(currentPosition) {
@@ -78,7 +78,7 @@ export class game {
         [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7]],
         [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]],
         [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0]]];
-        let moves = this.getInBoundaryMoves(queenMoves, currentPosition);
+        let moves = this.getPossibleMoves(queenMoves, currentPosition);
         return moves;
     }
     getPawnMoves(currentPosition) {
@@ -99,10 +99,10 @@ export class game {
         if (currentPosition[0] == 6) {
             pMoves[0].push([-2, 0]);
         }
-        moves = this.getInBoundaryMoves(pMoves, currentPosition);
+        moves = this.getPossibleMoves(pMoves, currentPosition);
         return moves;
     }
-    getPossibleMoves(currentPos) {
+    getMoves(currentPos) {
         let row = currentPos[0];
         let col = currentPos[1];
         let currentPosPiece = this.chessBoard[row][col];
@@ -126,7 +126,7 @@ export class game {
     }
 
     movePiece(currentPosition, destination) {
-        let possibleMoves = this.getPossibleMoves(currentPosition);
+        let possibleMoves = this.getMoves(currentPosition);
         let flag = false;
         let arr;
         for (let i = 0; i < possibleMoves.length; i++) {

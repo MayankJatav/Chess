@@ -14,7 +14,8 @@
         }
 
         .col {
-            display: inline-block;
+            flex-shrink: 0;
+            margin: 1px;
             height: 75px;
             width: 75px;
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -25,11 +26,20 @@
             width: 100%;
             filter: drop-shadow(0 0 0.75rem black);
         }
+
+        .row, .col {
+            display: flex;
+        }
+
+        #board {
+            display: inline-flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 
 <body>
-    <div id="board" style="display: inline-block;">
+    <div id="board">
         <div class="row">
             <div class="col"></div>
             <div class="col"></div>

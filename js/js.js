@@ -3,7 +3,6 @@ let board;
 let gameCurrent = new game();
 window.onload = function () {
     board = getBoard();
-    setCellClickAction();
     initBoard();
 }
 function getBoard() {
@@ -71,4 +70,11 @@ function glowCells(currentPos) {
     for (let i = 0; i < movesArray.length; i++) {
         board[movesArray[i][0]][movesArray[i][1]].style.backgroundColor = "blue";
     }
+}
+let startGameBtn = document.getElementById("startGameBtn")
+startGameBtn.onclick = function startGame() {
+    gameCurrent = new game();
+    colorCells();
+    setCellClickAction();
+    startGameBtn.textContent = "Reset Game";
 }

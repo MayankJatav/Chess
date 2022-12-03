@@ -8,6 +8,7 @@ export class game {
         ["", "", "", "", "", "", "", ""],
         ["pawnw", "pawnw", "pawnw", "pawnw", "pawnw", "pawnw", "pawnw", "pawnw"],
         ["rookw", "knightw", "bishopw", "queenw", "kingw", "bishopw", "knightw", "rookw"]];
+        this.moveNumber = 0;
     }
     getPossibleMoves(pieceMoves, currentPosition) {
         let moves = [];
@@ -166,6 +167,7 @@ export class game {
             this.chessBoard[destination[0]][destination[1]] = this.chessBoard[currentPosition[0]][currentPosition[1]];
             this.chessBoard[currentPosition[0]][currentPosition[1]] = "";
         }
+        this.moveNumber++;
     }
 
 }
